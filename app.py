@@ -24,11 +24,11 @@ def predict():
     confidence = round(max(probability[0]) * 100, 2)
 
     return render_template(
-    "index.html",
-    prediction=prediction,
-    confidence=confidence,
-    review=review
-)
+        "index.html",
+        prediction=prediction,
+        confidence=confidence,
+        review=review
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
