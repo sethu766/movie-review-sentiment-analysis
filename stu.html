@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Login Form</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+    .container{
+        width: 450px;
+        margin: 30px auto;
+        padding: 2rem;
+        border: 2px solid black;
+        border-radius: 10px;
+        background-color: white;
+    }
+
+    h2{
+        text-align: center;
+        color: navy;
+    }
+
+    .img-box{
+        width: 120px;
+        height: 120px;
+        border: 2px solid gray;
+        margin: 10px auto;
+        text-align: center;
+        line-height: 120px;
+        overflow: hidden;
+    }
+
+    .img-box img{
+        width: 100%;
+        height: 100%;
+    }
+
+    label{
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    input, select, textarea{
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid gray;
+        border-radius: 5px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    .gender{
+        margin-top: 10px;
+    }
+
+    button{
+        width: 100%;
+        padding: 0.8rem;
+        margin-top: 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: green;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover{
+        background-color: darkgreen;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Student Login Form</h2>
+
+    <!-- Image Box -->
+    <div class="img-box">
+        <img src="https://via.placeholder.com/120" alt="Student">
+    </div>
+
+    <form>
+
+        <label>First Name</label>
+        <input type="text" placeholder="Enter First Name">
+
+        <label>Last Name</label>
+        <input type="text" placeholder="Enter Last Name">
+
+        <label>Email</label>
+        <input type="email" placeholder="Enter Email">
+
+        <label>Phone Number</label>
+        <input type="tel" placeholder="Enter Phone Number">
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter Password">
+
+        <label>Date of Birth</label>
+        <input type="date">
+
+        <label>Department</label>
+        <select>
+            <option>CSE</option>
+            <option>ECE</option>
+            <option>EEE</option>
+            <option>ME</option>
+            <option>Civil</option>
+        </select>
+
+        <div class="gender">
+            <label>Gender</label>
+            <input type="radio" name="gender"> Male
+            <input type="radio" name="gender"> Female
+        </div>
+
+        <label>Address</label>
+        <textarea rows="4" placeholder="Enter Address"></textarea>
+
+        <input type="checkbox"> I agree to the terms and conditions
+
+        <button type="submit">Login</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

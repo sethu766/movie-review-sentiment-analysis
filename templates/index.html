@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Movie Sentiment Analytics Dashboard</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="dashboard">
+
+    <div class="header">
+        <h1>Movie Sentiment Analytics Dashboard</h1>
+        <p>AI Powered Movie Review Analysis</p>
+    </div>
+
+    <div class="top-section">
+
+        <div class="card gauge-card">
+
+            <h3>Sentiment Score</h3>
+
+            {% if prediction == "positive" %}
+                <div class="gauge positive">
+                    <span>POSITIVE</span>
+                </div>
+            {% elif prediction == "negative" %}
+                <div class="gauge negative">
+                    <span>NEGATIVE</span>
+                </div>
+            {% else %}
+                <div class="gauge neutral">
+                    <span>READY</span>
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="card stats-card">
+
+            <h3>Prediction Statistics</h3>
+
+            {% if prediction %}
+
+            <div class="stat">
+                <h2>{{ confidence }}%</h2>
+                <p>Confidence Score</p>
+            </div>
+
+            <div class="prediction-box">
+
+                <span class="label">Classification</span>
+
+                <h2>
+                    {{ prediction.upper() }}
+                </h2>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty">
+                Analyze a review to generate statistics.
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="card input-card">
+
+        <h3>Review Analysis</h3>
+
+        <form action="/predict" method="POST">
+
+            <textarea
+            name="review"
+            placeholder="Enter movie review..."
+            required>{{ review if review else '' }}</textarea>
+
+            <button type="submit">
+                Analyze Sentiment
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="card chart-card">
+
+        <h3>Sentiment Trend Visualization</h3>
+
+        <canvas id="sentimentChart"></canvas>
+
+    </div>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById('sentimentChart');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+        datasets: [{
+            label: 'Sentiment Trend',
+            data: [55,62,58,70,68,75,72],
+            borderWidth: 3,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive:true,
+        plugins:{
+            legend:{
+                labels:{
+                    color:'white'
+                }
+            }
+        },
+        scales:{
+            x:{
+                ticks:{
+                    color:'white'
+                }
+            },
+            y:{
+                ticks:{
+                    color:'white'
+                }
+            }
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>
