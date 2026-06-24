@@ -22,7 +22,7 @@ def predict():
     probability = model.predict_proba(review_vector)
 
     confidence = round(max(probability[0]) * 100, 2)
-
+    word_count = len(review.split())
     return render_template(
         "index.html",
         prediction=prediction,

@@ -6,68 +6,101 @@
 
 <title>Movie Sentiment Analytics Dashboard</title>
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 <body>
 
+<div class="background-blur blur1"></div>
+<div class="background-blur blur2"></div>
+
 <div class="dashboard">
 
+    <div class="navbar">
+        <div class="logo">SentimentAI</div>
+        <div class="nav-subtitle">Machine Learning Dashboard</div>
+    </div>
+
     <div class="header">
-        <h1>Movie Sentiment Analytics Dashboard</h1>
-        <p>AI Powered Movie Review Analysis</p>
+        <h1>Movie Review Sentiment Analysis</h1>
+        <p>
+            AI-powered sentiment classification using NLP,
+            TF-IDF Vectorization and Logistic Regression.
+        </p>
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h2>50K+</h2>
+            <p>IMDb Reviews</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>89.54%</h2>
+            <p>Accuracy</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>TF-IDF</h2>
+            <p>Vectorization</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>Logistic Regression</h2>
+            <p>Algorithm</p>
+        </div>
+
     </div>
 
     <div class="top-section">
 
-        <div class="card gauge-card">
+        <div class="glass-card">
 
-            <h3>Sentiment Score</h3>
+            <h3>Sentiment Status</h3>
 
             {% if prediction == "positive" %}
-                <div class="gauge positive">
-                    <span>POSITIVE</span>
-                </div>
+            <div class="gauge positive">
+                <span>POSITIVE</span>
+            </div>
+
             {% elif prediction == "negative" %}
-                <div class="gauge negative">
-                    <span>NEGATIVE</span>
-                </div>
+            <div class="gauge negative">
+                <span>NEGATIVE</span>
+            </div>
+
             {% else %}
-                <div class="gauge neutral">
-                    <span>READY</span>
-                </div>
+            <div class="gauge neutral">
+                <span>READY</span>
+            </div>
             {% endif %}
 
         </div>
 
-        <div class="card stats-card">
+        <div class="glass-card">
 
-            <h3>Prediction Statistics</h3>
+            <h3>Prediction Details</h3>
 
             {% if prediction %}
 
-            <div class="stat">
-                <h2>{{ confidence }}%</h2>
-                <p>Confidence Score</p>
+            <div class="confidence-value">
+                {{ confidence }}%
             </div>
 
-            <div class="prediction-box">
+            <div class="progress-bar">
+                <div class="progress-fill"
+                
+                </div>
+            </div>
 
-                <span class="label">Classification</span>
-
-                <h2>
-                    {{ prediction.upper() }}
-                </h2>
-
+            <div class="prediction-label">
+                {{ prediction.upper() }}
             </div>
 
             {% else %}
 
-            <div class="empty">
-                Analyze a review to generate statistics.
+            <div class="empty-state">
+                Submit a review to generate results.
             </div>
 
             {% endif %}
@@ -76,7 +109,7 @@ href="{{ url_for('static', filename='style.css') }}">
 
     </div>
 
-    <div class="card input-card">
+    <div class="glass-card">
 
         <h3>Review Analysis</h3>
 
@@ -84,7 +117,7 @@ href="{{ url_for('static', filename='style.css') }}">
 
             <textarea
             name="review"
-            placeholder="Enter movie review..."
+            placeholder="Enter a movie review..."
             required>{{ review if review else '' }}</textarea>
 
             <button type="submit">
@@ -94,57 +127,33 @@ href="{{ url_for('static', filename='style.css') }}">
         </form>
 
     </div>
+    return render_template(
+    "index.html",
+    prediction=prediction,
+    confidence=confidence,
+    review=review,
+    word_count=word_count
+    )
+    {% if review %}
 
-    <div class="card chart-card">
+    <div class="glass-card">
 
-        <h3>Sentiment Trend Visualization</h3>
+        <h3>Input Review</h3>
 
-        <canvas id="sentimentChart"></canvas>
+        <p class="review-text">
+            {{ review }}
+        </p>
 
     </div>
 
+    {% endif %}
+
+    <footer>
+        Movie Review Sentiment Analysis Dashboard |
+        
+    </footer>
+
 </div>
-
-<script>
-
-const ctx = document.getElementById('sentimentChart');
-
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
-        datasets: [{
-            label: 'Sentiment Trend',
-            data: [55,62,58,70,68,75,72],
-            borderWidth: 3,
-            tension: 0.4
-        }]
-    },
-    options: {
-        responsive:true,
-        plugins:{
-            legend:{
-                labels:{
-                    color:'white'
-                }
-            }
-        },
-        scales:{
-            x:{
-                ticks:{
-                    color:'white'
-                }
-            },
-            y:{
-                ticks:{
-                    color:'white'
-                }
-            }
-        }
-    }
-});
-
-</script>
 
 </body>
 </html>

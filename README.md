@@ -50,8 +50,4 @@ requirements.txt
 ```bash
 pip install -r requirements.txt
 python app.py
-```
-
-## Author
-
-Sethulekshmi S
+``
